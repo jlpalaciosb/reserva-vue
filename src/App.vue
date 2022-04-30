@@ -1,5 +1,5 @@
 <template>
-  <Login v-if="$store.state.token == null" />
+  <Login v-if="$store.state.token == null || $store.state.usuario == null" />
   <Layout v-else />
   <Loading v-model:active="isLoading" :is-full-page="true"/>
 </template>

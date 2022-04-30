@@ -68,16 +68,23 @@ export default {
       axios.post('/tokens/create', creds) 
         .then(response => {
           let res = response.data
-          if (res.token) {
+          if (res.usuario && res.token) {
             this.$store.commit('setToken', res.token)
+            this.$store.commit('setUsuario', res.usuario)
+            this.$toast.success('Bienvenido ' + res.usuario.nombre)
+          } else {
+            this.$toast.error('Algo salió mal')
           }
         })
         .catch(error => {
-          if (error.response && error.response.data) {
+          if (error?.response?.data?.message) {
             let res = error.response.data
+            this.$toast.error(res.message)
             if (res.errors) {
               this.errors = { ...this.errors, ...res.errors };
             }
+          } else {
+            this.$toast.error('Algo salió mal')
           }
         })
         .finally(() => {
