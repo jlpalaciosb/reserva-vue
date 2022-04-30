@@ -77,15 +77,9 @@ export default {
           }
         })
         .catch(error => {
-          if (error?.response?.data?.message) {
-            let res = error.response.data
-            this.$toast.error(res.message)
-            if (res.errors) {
-              this.errors = { ...this.errors, ...res.errors };
-            }
-          } else {
-            this.$toast.error('Algo salió mal')
-          }
+          let res = error?.response?.data
+          this.errors = { ...this.errors, ...(res?.errors || {}) };
+          this.$toast.error(res?.message || 'Algo salió mal')
         })
         .finally(() => {
           this.$store.commit('finLoading')

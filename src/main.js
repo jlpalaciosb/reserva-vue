@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 import VueToast from 'vue-toast-notification'
 import App from './App.vue'
 import 'vue-toast-notification/dist/theme-sugar.css'
+import util from './util'
 
 // variables nativas globales
 window.axios = require('axios')
@@ -46,4 +47,5 @@ const store = createStore({
 const app = createApp(App)
 app.use(VueToast, { position: 'top' })
 app.use(store)
+app.use(util)
 app.mount('#app')
