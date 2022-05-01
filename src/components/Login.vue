@@ -62,7 +62,7 @@ export default {
       let creds = {
         username: this.username,
         password: this.password,
-        token_name: 'asdf'
+        device: 'asdf'
       }
       this.$store.commit('iniLoading')
       axios.post('/tokens/create', creds) 
