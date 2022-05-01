@@ -27,7 +27,9 @@
                   {{ error }}
                 </div>
               </div>
-              <button @click="login()" class="btn btn-primary">Ingresar</button>
+              <div class="">
+                <button @click="login()" class="btn btn-primary">Ingresar</button>
+              </div>
             </div>
           </div>
         </div>
