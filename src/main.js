@@ -4,6 +4,7 @@ import VueToast from 'vue-toast-notification'
 import App from './App.vue'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import util from './util'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 // variables nativas globales
 window.axios = require('axios')
@@ -43,8 +44,22 @@ const store = createStore({
   }
 })
 
+// vue router
+import Login from './components/Login.vue'
+import Inicio from './components/Inicio.vue'
+const routes = [
+  { path: '/', component: App },
+  { path: '/login', component: Login },
+  { path: '/home', component: Inicio },
+]
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+})
+
 // aplicacion
 const app = createApp(App)
+app.use(router)
 app.use(VueToast, { position: 'top' })
 app.use(store)
 app.use(util)

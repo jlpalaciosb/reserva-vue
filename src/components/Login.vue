@@ -27,8 +27,13 @@
                   {{ error }}
                 </div>
               </div>
-              <div class="">
-                <button @click="login()" class="btn btn-primary">Ingresar</button>
+              <div class="d-flex justify-content-between">
+                <button @click="login()" class="btn btn-primary">
+                  Ingresar
+                </button>
+                <button @click="login()" class="btn btn-light">
+                  Registrarme
+                </button>
               </div>
             </div>
           </div>
@@ -75,6 +80,7 @@ export default {
             this.$store.commit('setUsuario', res.usuario)
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.token
             this.$toast.success('Bienvenido ' + res.usuario.nombre)
+            this.$router.push('/home')
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -104,5 +110,8 @@ export default {
 <style scoped>
   .card {
     margin-top: 60px;
+  }
+  button {
+    width: 8rem;
   }
 </style>
