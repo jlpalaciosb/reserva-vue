@@ -8,7 +8,7 @@
 import Login from './components/Login.vue'
 import Layout from './components/Layout.vue'
 import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css';
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   name: 'App',
@@ -32,13 +32,9 @@ export default {
 }
 </script>
 
+<!-- Don't add "scoped" attribute to apply CSS to all components -->
 <style>
-  /* #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  } */
+  .v-toast {
+    z-index: 999999 !important;
+  }
 </style>

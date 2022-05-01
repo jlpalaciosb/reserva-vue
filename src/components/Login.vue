@@ -66,19 +66,20 @@ export default {
       }
       this.$store.commit('iniLoading')
       axios.post('/tokens/create', creds) 
-        .then(response => {
+        .then((response) => {
           let res = response.data
           if (res.usuario && res.token) {
             this.$store.commit('setToken', res.token)
             this.$store.commit('setUsuario', res.usuario)
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.token
             this.$toast.success('Bienvenido ' + res.usuario.nombre)
           } else {
             this.$toast.error('Algo salió mal')
           }
         })
-        .catch(error => {
+        .catch((error) => {
           let res = error?.response?.data
-          this.errors = { ...this.errors, ...(res?.errors || {}) };
+          this.errors = { ...this.errors, ...(res?.errors || {}) }
           this.$toast.error(res?.message || 'Algo salió mal')
         })
         .finally(() => {
