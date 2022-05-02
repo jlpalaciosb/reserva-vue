@@ -19,20 +19,21 @@ const store = createStore({
     return {
       usuario: null, // usuario logueado
       token: null,
+      isAuthenticated: false,
       loadingCount: 0
     }
   },
   mutations: {
-    setUsuario (state, usuario) {
+    login(state, [usuario, token]) {
       state.usuario = usuario
-    },
-    setToken (state, token) {
       state.token = token
+      state.isAuthenticated = true
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
     },
     logout (state) {
       state.usuario = null
       state.token = null
+      state.isAuthenticated = false
       axios.defaults.headers.common['Authorization'] = null
     },
     iniLoading (state) {
@@ -53,15 +54,25 @@ import Registro from './components/Registro.vue'
 import Inicio from './components/Inicio.vue'
 import Admin from './components/Admin.vue'
 const routes = [
-  { path: '/', component: App },
-  { path: '/login', component: Login },
-  { path: '/registro', component: Registro },
-  { path: '/home', component: Inicio },
-  { path: '/admin', component: Admin },
+  { path: '/', redirect: '/home' },
+  { path: '/home', name: 'Inicio', component: Inicio },
+  { path: '/login', name: 'Login', component: Login, meta: { noLogin: true } },
+  { path: '/registro', name: 'Registro', component: Registro, meta: { noLogin: true } },
+  { path: '/admin', name: 'Admin', component: Admin },
 ]
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+})
+router.beforeEach((to , from, next) => {
+  console.log('router.beforeEach', to, from)
+  if (!store.state.isAuthenticated && !to.meta.noLogin) {
+    next('/login')
+  } else if (store.state.isAuthenticated && to.meta.noLogin) {
+    next('/home')
+  } else {
+    next()
+  }
 })
 
 // aplicacion

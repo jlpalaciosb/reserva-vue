@@ -1,5 +1,5 @@
 <template>
-  <NavBar v-if="isLoggedIn" />
+  <NavBar v-if="$store.state.isAuthenticated" />
   <div class="container">
     <RouterView />
   </div>
@@ -24,18 +24,10 @@ export default {
   computed: {
     isLoading() {
       return this.$store.state.loadingCount > 0
-    },
-    isLoggedIn() {
-      return this.$store.state.token != null && this.$store.state.usuario != null
     }
   },
   created() {
     console.log('app creada')
-    if (this.isLoggedIn) {
-      this.$router.push('/home')
-    } else {
-      this.$router.push('/login')
-    }
   },
   mounted() {
     console.log('app montada')

@@ -76,10 +76,9 @@ export default {
         .then((response) => {
           let res = response.data
           if (res.usuario && res.token) {
-            this.$store.commit('setToken', res.token)
-            this.$store.commit('setUsuario', res.usuario)
+            this.$store.commit('login', [res.usuario, res.token])
             this.$toast.success('Bienvenido ' + res.usuario.nombre)
-            this.$router.push('/home')
+            this.$router.push('/')
           } else {
             this.$toast.error('Algo salió mal')
           }
