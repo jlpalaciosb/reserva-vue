@@ -27,10 +27,12 @@ const store = createStore({
     },
     setToken (state, token) {
       state.token = token
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
     },
     logout (state) {
       state.usuario = null
       state.token = null
+      axios.defaults.headers.common['Authorization'] = null
     },
     iniLoading (state) {
       state.loadingCount++
@@ -46,10 +48,12 @@ const store = createStore({
 
 // vue router
 import Login from './components/Login.vue'
+import Registro from './components/Registro.vue'
 import Inicio from './components/Inicio.vue'
 const routes = [
   { path: '/', component: App },
   { path: '/login', component: Login },
+  { path: '/registro', component: Registro },
   { path: '/home', component: Inicio },
 ]
 const router = createRouter({

@@ -18,7 +18,8 @@
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        <button @click="logout()" class="btn btn-light">Logout</button>
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search"> -->
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
       </form>
     </div>
@@ -30,6 +31,12 @@ export default {
   name: 'NavBar',
   props: {
     // msg: String
+  },
+  methods: {
+    logout() {
+      this.$store.commit('logout')
+      this.$router.push('/login')
+    }
   }
 }
 </script>

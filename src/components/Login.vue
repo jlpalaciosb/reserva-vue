@@ -31,9 +31,9 @@
                 <button @click="login()" class="btn btn-primary">
                   Ingresar
                 </button>
-                <button @click="login()" class="btn btn-light">
+                <router-link to="/registro" class="btn btn-light">
                   Registrarme
-                </button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -78,7 +78,6 @@ export default {
           if (res.usuario && res.token) {
             this.$store.commit('setToken', res.token)
             this.$store.commit('setUsuario', res.usuario)
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.token
             this.$toast.success('Bienvenido ' + res.usuario.nombre)
             this.$router.push('/home')
           } else {
