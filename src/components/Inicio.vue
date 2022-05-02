@@ -82,7 +82,7 @@ export default {
       axios.get('/horariosRecursos')
         .then((response) => {
           let res = response.data
-          if (res.length) { // si es un array
+          if (res.length >= 0) { // si es un array
             this.listaHorarioRecurso = res
           } else {
             this.$toast.error('Algo salió mal')

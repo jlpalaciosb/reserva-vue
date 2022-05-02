@@ -50,11 +50,13 @@ const store = createStore({
 import Login from './components/Login.vue'
 import Registro from './components/Registro.vue'
 import Inicio from './components/Inicio.vue'
+import Admin from './components/Admin.vue'
 const routes = [
   { path: '/', component: App },
   { path: '/login', component: Login },
   { path: '/registro', component: Registro },
   { path: '/home', component: Inicio },
+  { path: '/admin', component: Admin },
 ]
 const router = createRouter({
   history: createWebHashHistory(),

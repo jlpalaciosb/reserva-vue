@@ -67,6 +67,9 @@
                 <button @click="register()" class="btn btn-primary">
                   Registrarme
                 </button>
+                <router-link to="/login" class="btn btn-light">
+                  Cancelar
+                </router-link>
               </div>
             </div>
           </div>
