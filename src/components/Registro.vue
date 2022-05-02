@@ -105,9 +105,6 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log('registro')
-  },
   methods: {
     register() {
       let newUser = {

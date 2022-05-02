@@ -61,9 +61,6 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log('login')
-  },
   methods: {
     login() {
       let creds = {

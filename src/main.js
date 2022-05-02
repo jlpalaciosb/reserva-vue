@@ -65,7 +65,7 @@ const router = createRouter({
   routes,
 })
 router.beforeEach((to , from, next) => {
-  console.log('router.beforeEach', to, from)
+  console.log('router.beforeEach', to)
   if (!store.state.isAuthenticated && !to.meta.noLogin) {
     next('/login')
   } else if (store.state.isAuthenticated && to.meta.noLogin) {
