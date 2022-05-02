@@ -1,35 +1,41 @@
 <template>
-  <div v-if="$store.state.usuario.is_admin">
+  <div v-if="$store.state.usuario?.is_admin">
     <h1>Programar horarios y recursos</h1>
     <div class="form-group">
       <label for="input-fecha">Fecha</label>
-      <input v-model="fecha" @change="getListaHorarioRecurso()"
+      <input v-model="fecha" @change="getHorariosRecursos()"
       type="date" class="form-control" id="input-fecha">
     </div>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Horarios</th>
-            <th v-for="rec, index in recursos" :key="index">
-              {{ rec.nombre }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="hor, index in horarios" :key="index">
-            <td>{{ $util.labelHorario(hor) }}</td>
-            <td v-for="rec, index in recursos" :key="index">
-              <div>
-                <input type="number" min="0"
-                :value="getHorarioRecurso(hor.id, rec.id)?.limite || 0"
-                @keypress.enter="programar(hor.id, rec.id, $event.target.value)"
-                class="form-control">
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div v-if="horarios.length
+    && recursos.length
+    && horariosRecursos.length == (horarios.length * recursos.length)">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Horarios</th>
+              <th v-for="rec, index in recursos" :key="index">
+                {{ rec.nombre }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="hor, index in horarios" :key="index">
+              <td>{{ $util.labelHorario(hor) }}</td>
+              <td v-for="rec, index in recursos" :key="index">
+                <div>
+                  <input type="number" min="0"
+                  v-model="findHorarioRecurso(hor.id, rec.id).limite"
+                  class="form-control">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn btn-primary" @click="guardar()">
+        Guardar
+      </button>
     </div>
   </div>
 </template>
@@ -43,7 +49,7 @@ export default {
   data() {
     return {
       fecha: '',
-      listaHorarioRecurso: [],
+      horariosRecursos: [],
       horarios: [],
       recursos: [],
     }
@@ -53,7 +59,7 @@ export default {
   created() {
     this.getHorarios()
     this.getRecursos()
-    this.getListaHorarioRecurso()
+    this.getHorariosRecursos()
   },
   methods: {
     getHorarios() {
@@ -63,6 +69,7 @@ export default {
           let res = response.data
           if (res.length >= 0) { // si es un array
             this.horarios = res
+            this.fillHorariosRecursos()
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -82,6 +89,7 @@ export default {
           let res = response.data
           if (res.length >= 0) { // si es un array
             this.recursos = res
+            this.fillHorariosRecursos()
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -94,13 +102,14 @@ export default {
           this.$store.commit('finLoading')
         })
     },
-    getListaHorarioRecurso() {
+    getHorariosRecursos() {
       this.$store.commit('iniLoading')
       axios.get(`/horariosRecursos?fecha=${this.fecha}`)
         .then((response) => {
           let res = response.data
           if (res.length >= 0) { // si es un array
-            this.listaHorarioRecurso = res
+            this.horariosRecursos = res
+            this.fillHorariosRecursos()
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -113,28 +122,21 @@ export default {
           this.$store.commit('finLoading')
         })
     },
-    getHorarioRecurso(idHorario, idRecurso) {
-      return this.listaHorarioRecurso
+    findHorarioRecurso(idHorario, idRecurso) {
+      return this.horariosRecursos
         .filter(hr =>
-          hr.horario.id == idHorario &&
-          hr.recurso.id == idRecurso)[0]
+          hr.id_horario == idHorario &&
+          hr.id_recurso == idRecurso)[0]
         || null;
     },
-    programar(idHorario, idRecurso, limite) {
-      let body = {
-        id: this.getHorarioRecurso(idHorario, idRecurso)?.id || null,
-        fecha: this.fecha,
-        id_horario: idHorario,
-        id_recurso: idRecurso,
-        limite: limite,
-      }
+    guardar() {
       this.$store.commit('iniLoading')
-      axios.post('/horariosRecursos', body)
+      axios.post('/horariosRecursos', this.horariosRecursos)
         .then((response) => {
           let res = response.data
-          if (res.id) {
+          if (res.ok) {
             this.$toast.success('Programado')
-            this.getListaHorarioRecurso()
+            this.getHorariosRecursos()
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -146,6 +148,21 @@ export default {
         .finally(() => {
           this.$store.commit('finLoading')
         })
+    },
+    fillHorariosRecursos() {
+      this.horarios.forEach(hor => {
+        this.recursos.forEach(rec => {
+          let hr = this.findHorarioRecurso(hor.id, rec.id)
+          if (hr == null) {
+            this.horariosRecursos.push({
+              fecha: this.fecha,
+              id_horario: hor.id,
+              id_recurso: rec.id,
+              limite: 0,
+            })
+          }
+        })
+      })
     }
   }
 }

@@ -59,7 +59,7 @@ export default {
             horarios.push(h0)
           }
         })
-      return horarios
+      return arraySort(horarios, ['hora_ini', 'hora_fin'])
     },
     recursos() {
       let recursos = []
@@ -70,7 +70,7 @@ export default {
             recursos.push(r0)
           }
         })
-      return recursos
+      return arraySort(recursos, ['nombre'])
     }
   },
   created() {
@@ -114,7 +114,6 @@ export default {
           let res = response.data
           if (res.id) {
             this.$toast.success('Reservado')
-            this.getListaHorarioRecurso()
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -125,6 +124,7 @@ export default {
         })
         .finally(() => {
           this.$store.commit('finLoading')
+          this.getListaHorarioRecurso()
         })
     }
   }
