@@ -1,12 +1,33 @@
 <template>
   <div v-if="$store.state.usuario?.is_admin">
-    <h1>Programar horarios y recursos</h1>
-    <div class="form-group">
-      <label for="input-fecha">Fecha</label>
-      <input v-model="fecha" @change="getHorariosRecursos()"
-      type="date" class="form-control" id="input-fecha">
+    <h1>Administrar...</h1>
+    <div class="row">
+      <div class="col-12 col-lg-4 form-group">
+        <label for="input-fecha">
+          Fecha de Programación <span class="text-danger">*</span>
+        </label>
+        <input v-model="fecha" :class="{ 'is-invalid': !fecha }"
+        type="date" class="form-control" id="input-fecha">
+        <div class="invalid-feedback">
+          Ingrese una fecha 
+        </div>
+      </div>
+      <div class="col-12 col-lg-8 form-group">
+        <label>Autocompletar</label>
+        <div>
+          <button class="btn btn-primary" title="Igual que ayer"
+          :disabled="!fecha" @click="getHorariosRecursos(-1)">
+            -1 día
+          </button>
+          <button class="btn btn-primary ml-3" title="Igual que la semana pasada"
+          :disabled="!fecha" @click="getHorariosRecursos(-7)">
+            -7 días
+          </button>
+        </div>
+      </div>
     </div>
-    <div v-if="horarios.length
+    <div v-if="fecha
+    && horarios.length
     && recursos.length
     && horariosRecursos.length == (horarios.length * recursos.length)">
       <div class="table-responsive">
@@ -48,7 +69,7 @@ export default {
   },
   data() {
     return {
-      fecha: '',
+      fecha: this.$util.localHoyISO(),
       horariosRecursos: [],
       horarios: [],
       recursos: [],
@@ -102,13 +123,18 @@ export default {
           this.$store.commit('finLoading')
         })
     },
-    getHorariosRecursos() {
+    getHorariosRecursos(offset = 0) {
       this.$store.commit('iniLoading')
-      axios.get(`/horariosRecursos?fecha=${this.fecha}`)
+      axios.get(`/horariosRecursos?fecha=${this.fecha}&offset=${offset}`)
         .then((response) => {
           let res = response.data
           if (res.length >= 0) { // si es un array
             this.horariosRecursos = res
+            if (offset) {
+              this.horariosRecursos.forEach(hr => {
+                hr.fecha = this.fecha; // fix fecha
+              })
+            }
             this.fillHorariosRecursos()
           } else {
             this.$toast.error('Algo salió mal')
@@ -135,8 +161,8 @@ export default {
         .then((response) => {
           let res = response.data
           if (res.ok) {
-            this.$toast.success('Programado')
-            this.getHorariosRecursos()
+            this.$toast.success('Programación de recursos guardada')
+            this.getHorariosRecursos() // refresh set id modelo HorarioRecurso
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -154,7 +180,9 @@ export default {
         this.recursos.forEach(rec => {
           let hr = this.findHorarioRecurso(hor.id, rec.id)
           if (hr == null) {
+            // fill new HorarioRecurso
             this.horariosRecursos.push({
+              id: null,
               fecha: this.fecha,
               id_horario: hor.id,
               id_recurso: rec.id,
@@ -163,6 +191,13 @@ export default {
           }
         })
       })
+    }
+  },
+  watch: {
+    fecha: function() {
+      if (this.fecha) {
+        this.getHorariosRecursos()
+      }
     }
   }
 }
