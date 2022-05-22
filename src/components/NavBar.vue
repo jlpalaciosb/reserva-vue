@@ -17,6 +17,11 @@
             Horarios
           </router-link>
         </li>
+        <li class="nav-item active">
+          <router-link v-if="$store.state.usuario?.is_admin" class="nav-link" to="/recursos">
+            Recursos
+          </router-link>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li> -->

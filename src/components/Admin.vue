@@ -105,7 +105,7 @@ export default {
     },
     getRecursos() {
       this.$store.commit('iniLoading')
-      axios.get('/recursos')
+      axios.get('/recursos?sub_index=all_activos')
         .then((response) => {
           let res = response.data
           if (res.length >= 0) { // si es un array

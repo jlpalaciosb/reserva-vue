@@ -1,29 +1,27 @@
 <template>
   <div v-if="$store.state.usuario?.is_admin">
-    <h1>Horarios</h1>
+    <h1>Recursos</h1>
     <div>
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Hora Inicio</th>
-              <th>Hora Fin</th>
+              <th>Activo</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="horario in horarios.data" :key="horario.id">
-              <td>{{ horario.nombre }}</td>
-              <td>{{ horario.hora_ini }}</td>
-              <td>{{ horario.hora_fin }}</td>
+            <tr v-for="recurso in recursos.data" :key="recurso.id">
+              <td>{{ recurso.nombre }}</td>
+              <td>{{ recurso.activo ? 'Sí' : 'No' }}</td>
               <td></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="d-flex justify-content-end">
-        <Pagination :data="horarios" @pagination-change-page="getHorarios" />
+        <Pagination :data="recursos" @pagination-change-page="getRecursos" />
       </div>
     </div>
   </div>
@@ -33,7 +31,7 @@
 import LaravelVuePagination from 'laravel-vue-pagination';
 
 export default {
-  name: 'HorarioIndex',
+  name: 'RecursoIndex',
   components: {
     Pagination: LaravelVuePagination,
   },
@@ -41,7 +39,7 @@ export default {
   },
   data() {
     return {
-      horarios: {}, // Our data object that holds the Laravel paginator data
+      recursos: {}, // Our data object that holds the Laravel paginator data
     }
   },
   computed: {
@@ -49,16 +47,16 @@ export default {
   created() {
   },
   mounted() {
-    this.getHorarios();
+    this.getRecursos();
   },
   methods: {
     // Our method to GET results from a Laravel endpoint
-    getHorarios(page = 1) {
+    getRecursos(page = 1) {
       this.$store.commit('iniLoading')
-      axios.get('/horarios?page=' + page)
+      axios.get('/recursos?page=' + page)
         .then(response => {
           this.$store.commit('finLoading')
-          this.horarios = response.data;
+          this.recursos = response.data;
         });
     }
   },

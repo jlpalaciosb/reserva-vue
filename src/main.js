@@ -54,6 +54,7 @@ import Registro from './components/Registro.vue'
 import Inicio from './components/Inicio.vue'
 import Admin from './components/Admin.vue'
 import HorarioIndex from './components/HorarioIndex.vue'
+import RecursoIndex from './components/RecursoIndex.vue'
 const routes = [
   { path: '/', redirect: '/home' },
   { path: '/home', name: 'Inicio', component: Inicio },
@@ -61,6 +62,7 @@ const routes = [
   { path: '/registro', name: 'Registro', component: Registro, meta: { noLogin: true } },
   { path: '/admin', name: 'Admin', component: Admin },
   { path: '/horarios', name: 'Horarios', component: HorarioIndex },
+  { path: '/recursos', name: 'Recursos', component: RecursoIndex },
 ]
 const router = createRouter({
   history: createWebHashHistory(),
