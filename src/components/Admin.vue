@@ -85,7 +85,7 @@ export default {
   methods: {
     getHorarios() {
       this.$store.commit('iniLoading')
-      axios.get('/horarios')
+      axios.get('/horarios?sub_index=all_activos')
         .then((response) => {
           let res = response.data
           if (res.length >= 0) { // si es un array
