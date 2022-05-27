@@ -41,6 +41,7 @@ const store = createStore({
     },
     finLoading (state) {
       state.loadingCount--
+      state.loadingCount = Math.max(0, state.loadingCount) // medida de seguridad
     },
     resetLoading (state) {
       state.loadingCount = 0
@@ -54,6 +55,7 @@ import Registro from './components/Registro.vue'
 import Inicio from './components/Inicio.vue'
 import Admin from './components/Admin.vue'
 import HorarioIndex from './components/HorarioIndex.vue'
+import HorarioInstance from './components/HorarioInstance.vue'
 import RecursoIndex from './components/RecursoIndex.vue'
 const routes = [
   { path: '/', redirect: '/home' },
@@ -62,6 +64,7 @@ const routes = [
   { path: '/registro', name: 'Registro', component: Registro, meta: { noLogin: true } },
   { path: '/admin', name: 'Admin', component: Admin },
   { path: '/horarios', name: 'Horarios', component: HorarioIndex },
+  { path: '/horarios/:id', name: 'Horario', component: HorarioInstance },
   { path: '/recursos', name: 'Recursos', component: RecursoIndex },
 ]
 const router = createRouter({
@@ -70,6 +73,7 @@ const router = createRouter({
 })
 router.beforeEach((to , from, next) => {
   console.log('router.beforeEach', to)
+  store.commit('resetLoading') // medida de seguridad
   if (!store.state.isAuthenticated && !to.meta.noLogin) {
     next('/login')
   } else if (store.state.isAuthenticated && to.meta.noLogin) {

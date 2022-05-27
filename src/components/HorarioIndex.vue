@@ -1,6 +1,24 @@
 <template>
   <div v-if="$store.state.usuario?.is_admin">
     <h1>Horarios</h1>
+    <div class="row align-items-end">
+      <div class="form-group col-6 col-lg-3">
+        <label for="filtro-hora-desde">Hora Desde:</label>
+        <input id="filtro-hora-desde" v-model="filtros.horaDesde"
+        type="time" class="form-control">
+      </div>
+      <div class="form-group col-6 col-lg-3">
+        <label for="filtro-hora-hasta">Hora Hasta:</label>
+        <input id="filtro-hora-hasta" v-model="filtros.horaHasta"
+        type="time" class="form-control">
+      </div>
+      <div class="form-group col-12 col-lg-6">
+        <button class="btn btn-primary mr-3" @click="getHorarios(1)">Filtrar</button>
+        <router-link to="/horarios/new" class="btn btn-success">
+          Nuevo
+        </router-link>
+      </div>
+    </div>
     <div>
       <div class="table-responsive">
         <table class="table">
@@ -41,7 +59,8 @@ export default {
   },
   data() {
     return {
-      horarios: {}, // Our data object that holds the Laravel paginator data
+      filtros: { horaDesde: '', horaHasta: '' },
+      horarios: {}, // Our data object that holds the LARAVEL PAGINATED data
     }
   },
   computed: {
@@ -55,7 +74,11 @@ export default {
     // Our method to GET results from a Laravel endpoint
     getHorarios(page = 1) {
       this.$store.commit('iniLoading')
-      axios.get('/horarios?page=' + page)
+      let params = new URLSearchParams();
+      params.set('page', page);
+      params.set('horaDesde', this.filtros.horaDesde);
+      params.set('horaHasta', this.filtros.horaHasta);
+      axios.get('/horarios?' + params.toString())
         .then(response => {
           this.$store.commit('finLoading')
           this.horarios = response.data;
