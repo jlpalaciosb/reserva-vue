@@ -35,7 +35,11 @@
               <td>{{ horario.nombre }}</td>
               <td>{{ horario.hora_ini }}</td>
               <td>{{ horario.hora_fin }}</td>
-              <td></td>
+              <td>
+                <router-link :to="`/horarios/${horario.id}`">
+                  Editar
+                </router-link>
+              </td>
             </tr>
           </tbody>
         </table>

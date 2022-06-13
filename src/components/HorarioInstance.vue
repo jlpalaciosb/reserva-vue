@@ -45,7 +45,9 @@
     </div>
     <div>
       <button class="btn btn-primary mr-3" @click="guardar()">Guardar</button>
-      <button class="btn btn-ligth" @click="$router.back()">Volver</button>
+      <button class="btn btn-ligth" @click="$router.push('/horarios')">
+        Volver al listado
+      </button>
     </div>
   </div>
 </template>
