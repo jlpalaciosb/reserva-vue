@@ -57,6 +57,7 @@ import Admin from './components/Admin.vue'
 import HorarioIndex from './components/HorarioIndex.vue'
 import HorarioInstance from './components/HorarioInstance.vue'
 import RecursoIndex from './components/RecursoIndex.vue'
+import RecursoInstance from './components/RecursoInstance.vue'
 const routes = [
   { path: '/', redirect: '/home' },
   { path: '/home', name: 'Inicio', component: Inicio },
@@ -66,6 +67,7 @@ const routes = [
   { path: '/horarios', name: 'Horarios', component: HorarioIndex },
   { path: '/horarios/:id', name: 'Horario', component: HorarioInstance },
   { path: '/recursos', name: 'Recursos', component: RecursoIndex },
+  { path: '/recursos/:id', name: 'Recurso', component: RecursoInstance },
 ]
 const router = createRouter({
   history: createWebHashHistory(),

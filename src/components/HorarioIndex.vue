@@ -3,17 +3,17 @@
     <h1>Horarios</h1>
     <div class="row align-items-end">
       <div class="form-group col-6 col-lg-3">
-        <label for="filtro-hora-desde">Hora Desde:</label>
+        <label for="filtro-hora-desde">Filtro Hora Desde:</label>
         <input id="filtro-hora-desde" v-model="filtros.horaDesde"
         type="time" class="form-control">
       </div>
       <div class="form-group col-6 col-lg-3">
-        <label for="filtro-hora-hasta">Hora Hasta:</label>
+        <label for="filtro-hora-hasta">Filtro Hora Hasta:</label>
         <input id="filtro-hora-hasta" v-model="filtros.horaHasta"
         type="time" class="form-control">
       </div>
       <div class="form-group col-12 col-lg-6">
-        <button class="btn btn-primary mr-3" @click="getHorarios(1)">Filtrar</button>
+        <button class="btn btn-primary mr-3" @click="getHorarios(1)">Listar</button>
         <router-link to="/horarios/new" class="btn btn-success">
           Nuevo
         </router-link>
