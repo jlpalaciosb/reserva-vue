@@ -29,9 +29,16 @@
               <td>{{ recurso.nombre }}</td>
               <td>{{ recurso.activo ? 'Sí' : 'No' }}</td>
               <td>
-                <router-link :to="`/recursos/${recurso.id}`">
-                  Editar
-                </router-link>
+                <div class="d-flex justify-content-center">
+                  <router-link :to="`/recursos/${recurso.id}`"
+                  class="btn btn-success mr-3">
+                    Editar
+                  </router-link>
+                  <button @click="eliminar(recurso)"
+                  class="btn btn-danger mr-3">
+                    Eliminar
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -79,6 +86,22 @@ export default {
           this.$store.commit('finLoading')
           this.recursos = response.data;
         });
+    },
+    eliminar(recurso) {
+      this.$store.commit('iniLoading')
+      axios.delete('/recursos/' + recurso.id)
+        .then(response => {
+          console.log(response)
+          this.$toast.success('Recurso eliminado!')
+          this.getRecursos(); // refresh listado
+        })
+        .catch((error) => {
+          let res = error?.response?.data
+          this.$toast.error(res?.message || 'Algo salió mal')
+        })
+        .finally(() => {
+          this.$store.commit('finLoading')
+        })
     }
   },
   watch: {
