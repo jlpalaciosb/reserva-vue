@@ -5,7 +5,7 @@
       <div class="col-12 col-sm-8 col-lg-4">
         <div class="card">
           <div class="card-header">
-            Registrarme
+            Nuevo usuario
           </div>
           <div class="card-body">
             <div>
@@ -65,10 +65,10 @@
               </div>
               <div class="d-flex justify-content-between">
                 <button @click="register()" class="btn btn-primary">
-                  Registrarme
+                  <i class="fas fa-save"></i> Guardar
                 </button>
                 <router-link to="/login" class="btn btn-light">
-                  Cancelar
+                  <i class="fas fa-arrow-left"></i> Cancelar
                 </router-link>
               </div>
             </div>

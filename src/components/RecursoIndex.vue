@@ -3,14 +3,16 @@
     <h1>Recursos</h1>
     <div class="row align-items-end">
       <div class="form-group col-6 col-lg-3">
-        <label for="filtro-nombre">Filtro Nombre:</label>
+        <label for="filtro-nombre">Filtro Nombre</label>
         <input id="filtro-nombre" v-model="filtros.nombre"
         type="text" class="form-control">
       </div>
       <div class="form-group col-12 col-lg-6">
-        <button class="btn btn-primary mr-3" @click="getRecursos(1)">Listar</button>
+        <button class="btn btn-primary mr-3" @click="getRecursos(1)">
+          <i class="fas fa-list"></i> Listar
+        </button>
         <router-link to="/recursos/new" class="btn btn-success">
-          Nuevo
+          <i class="fas fa-plus"></i> Nuevo
         </router-link>
       </div>
     </div>
@@ -32,11 +34,11 @@
                 <div class="d-flex justify-content-center">
                   <router-link :to="`/recursos/${recurso.id}`"
                   class="btn btn-success mr-3">
-                    Editar
+                    <i class="fas fa-edit"></i> Editar
                   </router-link>
                   <button @click="eliminar(recurso)"
                   class="btn btn-danger mr-3">
-                    Eliminar
+                    <i class="fas fa-trash"></i> Eliminar
                   </button>
                 </div>
               </td>

@@ -27,9 +27,11 @@
       </div>
     </div>
     <div>
-      <button class="btn btn-primary mr-3" @click="guardar()">Guardar</button>
+      <button class="btn btn-primary mr-3" @click="guardar()">
+        <i class="fas fa-save"></i> Guardar
+      </button>
       <button class="btn btn-ligth" @click="$router.push('/recursos')">
-        Volver al listado
+        <i class="fas fa-arrow-left"></i> Volver al listado
       </button>
     </div>
   </div>

@@ -29,10 +29,10 @@
               </div>
               <div class="d-flex justify-content-between">
                 <button @click="login()" class="btn btn-primary">
-                  Ingresar
+                  <i class="fas fa-sign-in-alt"></i> Ingresar
                 </button>
                 <router-link to="/registro" class="btn btn-light">
-                  Registrarme
+                  <i class="fas fa-user-plus"></i> Nuevo usuario
                 </router-link>
               </div>
             </div>

@@ -17,11 +17,11 @@
         <div>
           <button class="btn btn-primary" title="Igual que ayer"
           :disabled="!fecha" @click="getHorariosRecursos(-1)">
-            -1 día
+            <i class="fas fa-calendar"></i> -1 día
           </button>
           <button class="btn btn-primary ml-3" title="Igual que la semana pasada"
           :disabled="!fecha" @click="getHorariosRecursos(-7)">
-            -7 días
+            <i class="fas fa-calendar"></i> -7 días
           </button>
         </div>
       </div>
@@ -55,7 +55,7 @@
         </table>
       </div>
       <button class="btn btn-primary" @click="guardar()">
-        Guardar
+        <i class="fas fa-save"></i> Guardar
       </button>
     </div>
   </div>

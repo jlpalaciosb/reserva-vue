@@ -15,21 +15,27 @@
           <td>{{ $util.labelHorario(hor) }}</td>
           <td v-for="rec, index in recursos" :key="index"
           :set="horarioRecurso = getHorarioRecurso(hor.id, rec.id)">
-            <div v-if="horarioRecurso != null">
-              <div>
-                <span>
-                  Reservado: {{ horarioRecurso.reservas.length }} de
+            <div class="card">
+              <div v-if="horarioRecurso != null && horarioRecurso.limite > 0"
+              class="card-body">
+                <p>
+                  Reservado {{ horarioRecurso.reservas.length }} de
                   {{ horarioRecurso.limite }}
-                </span>
+                </p>
+                <div class="d-flex justify-content-end">
+                  <button @click="reservar(hor.id, rec.id)" class="btn btn-primary">
+                    <i class="fas fa-calendar-check"></i> Reservar
+                  </button>
+                </div>
               </div>
-              <div class="">
-                <button @click="reservar(hor.id, rec.id)" class="btn btn-primary">
-                  Reservar
-                </button>
+              <div v-else class="card-body">
+                <p>
+                  No disponible
+                </p>
+                <div class="invisible"> <!-- para igualar la altura del card -->
+                  <button class="btn btn-primary">asdf</button>
+                </div>
               </div>
-            </div>
-            <div v-else>
-              No disponible
             </div>
           </td>
         </tr>

@@ -30,7 +30,9 @@
         </li> -->
       </ul>
       <div class="form-inline my-2 my-lg-0">
-        <button @click="logout()" class="btn btn-light">Logout</button>
+        <button @click="logout()" class="btn btn-light">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
         <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search"> -->
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
       </div>
