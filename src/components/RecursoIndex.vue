@@ -90,6 +90,9 @@ export default {
         });
     },
     eliminar(recurso) {
+      if (!window.confirm('Por favor confirme!')) {
+        return false;
+      }
       this.$store.commit('iniLoading')
       axios.delete('/recursos/' + recurso.id)
         .then(response => {

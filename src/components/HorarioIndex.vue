@@ -98,6 +98,9 @@ export default {
         });
     },
     eliminar(horario) {
+      if (!window.confirm('Por favor confirme!')) {
+        return false;
+      }
       this.$store.commit('iniLoading')
       axios.delete('/horarios/' + horario.id)
         .then(response => {
