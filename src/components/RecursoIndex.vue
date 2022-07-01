@@ -18,12 +18,12 @@
     </div>
     <div>
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Nombre</th>
               <th>Activo</th>
-              <th></th>
+              <th style="width:0"></th> <!-- width 0 minimiza el ancho en bootstrap table-responsive -->
             </tr>
           </thead>
           <tbody>
@@ -34,11 +34,13 @@
                 <div class="d-flex justify-content-center">
                   <router-link :to="`/recursos/${recurso.id}`"
                   class="btn btn-success mr-3">
-                    <i class="fas fa-edit"></i> Editar
+                    <i class="fas fa-edit"></i>
+                    <span class="d-none d-lg-inline ml-1">Editar</span>
                   </router-link>
                   <button @click="eliminar(recurso)"
-                  class="btn btn-danger mr-3">
-                    <i class="fas fa-trash"></i> Eliminar
+                  class="btn btn-danger mr-3_">
+                    <i class="fas fa-trash"></i>
+                    <span class="d-none d-lg-inline ml-1">Eliminar</span>
                   </button>
                 </div>
               </td>
