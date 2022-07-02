@@ -10,7 +10,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 window.axios = require('axios')
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 window.axios.defaults.headers.common['Accept'] = 'application/json'
-window.axios.defaults.baseURL = process.env.VUE_APP_BACKEND + '/api'
+if (process.env.VUE_APP_BACKEND) {
+  window.axios.defaults.baseURL = process.env.VUE_APP_BACKEND + '/api'
+} else {
+  window.axios.defaults.baseURL = window.location.origin + '/api'
+}
 window.arraySort = require('array-sort')
 
 // variables de estado globales vuex
