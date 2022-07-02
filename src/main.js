@@ -20,6 +20,10 @@ const store = createStore({
       usuario: null, // usuario logueado
       token: null,
       isAuthenticated: false,
+      nomReservable00: process.env.VUE_APP_NOM_RESERVABLE_00,
+      nomReservable01: process.env.VUE_APP_NOM_RESERVABLE_01,
+      nomReservable10: process.env.VUE_APP_NOM_RESERVABLE_10,
+      nomReservable11: process.env.VUE_APP_NOM_RESERVABLE_11,
       loadingCount: 0
     }
   },

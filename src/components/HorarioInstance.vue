@@ -1,6 +1,8 @@
 <template>
   <div v-if="$store.state.usuario?.is_admin">
-    <h1>Horario</h1>
+    <h1 class="mt-3 mb-3">
+      Horario
+    </h1>
     <div class="row form-group">
       <div class="col-12 col-lg-4">
         <label for="nombre">

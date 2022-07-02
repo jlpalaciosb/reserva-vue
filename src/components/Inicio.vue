@@ -1,5 +1,7 @@
 <template>
-  <h1>Reservar...</h1>
+  <h1 class="mt-3 mb-3">
+    Reservar {{ $store.state.nomReservable11 }}
+  </h1>
   <div class="table-responsive">
     <table class="table">
       <thead>
@@ -89,7 +91,7 @@ export default {
         .then((response) => {
           let res = response.data
           if (res.length >= 0) { // si es un array
-            this.listaHorarioRecurso = res
+            this.listaHorarioRecurso = res.filter(hr => hr.limite > 0)
           } else {
             this.$toast.error('Algo salió mal')
           }

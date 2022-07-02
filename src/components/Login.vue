@@ -3,6 +3,9 @@
     <div class="row">
       <div class="col-0 col-sm-2 col-lg-4"></div>
       <div class="col-12 col-sm-8 col-lg-4">
+        <div class="d-flex justify-content-center mb-2">
+          <img src="/images/logo-color.png" alt="" height="32">
+        </div>
         <div class="card">
           <div class="card-header">
             Inicie Sesión
@@ -103,7 +106,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .card {
+  .container {
     margin-top: 60px;
   }
   button {

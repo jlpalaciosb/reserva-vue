@@ -1,6 +1,8 @@
 <template>
   <div v-if="$store.state.usuario?.is_admin">
-    <h1>Recursos</h1>
+    <h1 class="mt-3 mb-3">
+      Recursos
+    </h1>
     <div class="row align-items-end">
       <div class="form-group col-6 col-lg-3">
         <label for="filtro-nombre">Filtro Nombre</label>
