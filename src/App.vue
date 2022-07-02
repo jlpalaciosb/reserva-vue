@@ -1,6 +1,6 @@
 <template>
   <NavBar v-if="$store.state.isAuthenticated" />
-  <div class="container">
+  <div class="container mb-5">
     <RouterView />
   </div>
   <Loading v-if="isLoading" :active="true" :is-full-page="true"/>
@@ -24,13 +24,27 @@ export default {
   computed: {
     isLoading() {
       return this.$store.state.loadingCount > 0
+    },
+    title() {
+      return this.$route.name
+    }
+  },
+  methods: {
+    setDocumentTitle() {
+      document.title = 'ReservasYa - ' + this.title
     }
   },
   created() {
+    this.setDocumentTitle()
     console.log('app creada')
   },
   mounted() {
     console.log('app montada')
+  },
+  watch: {
+    title() {
+      this.setDocumentTitle()
+    }
   }
 }
 </script>
