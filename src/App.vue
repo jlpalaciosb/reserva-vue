@@ -37,6 +37,11 @@ export default {
   created() {
     this.setDocumentTitle()
     console.log('app creada')
+
+    this.$router.afterEach(() => {
+      // cerrar navbar al navegar para q no se quede abierto
+      jQuery('.navbar-collapse').collapse('hide')
+    })
   },
   mounted() {
     console.log('app montada')
@@ -44,6 +49,13 @@ export default {
   watch: {
     title() {
       this.setDocumentTitle()
+    },
+    isLoading() {
+      // al mostrarse el loading desenfocar inputs y botones para
+      // evitar doble click
+      if (this.isLoading) {
+        document.activeElement.blur()
+      }
     }
   }
 }
