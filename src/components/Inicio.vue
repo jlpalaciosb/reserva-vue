@@ -92,6 +92,17 @@ export default {
           let res = response.data
           if (res.length >= 0) { // si es un array
             this.listaHorarioRecurso = res.filter(hr => hr.limite > 0)
+            if (this.listaHorarioRecurso.length == 0) {
+              if (this.$store.state.usuario.is_admin) {
+                this.$toast.warning('Ingrese en administración para habilitar los recursos disponibles', {
+                  duration: 5000
+                })
+              } else {
+                this.$toast.warning('Ningún recurso disponible para reservar', {
+                  duration: 5000
+                })
+              }
+            }
           } else {
             this.$toast.error('Algo salió mal')
           }
