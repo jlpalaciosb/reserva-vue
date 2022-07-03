@@ -113,7 +113,7 @@ export default {
     },
     postHorario() {
       this.$store.commit('iniLoading')
-      axios.post('/horarios/', this.horario)
+      axios.post('/horarios', this.horario)
         .then(response => {
           this.horario.id = response.data.id;
           this.$toast.success('Nuevo horario guardado!')

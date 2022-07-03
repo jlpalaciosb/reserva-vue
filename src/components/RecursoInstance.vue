@@ -90,7 +90,7 @@ export default {
     },
     postRecurso() {
       this.$store.commit('iniLoading')
-      axios.post('/recursos/', this.recurso)
+      axios.post('/recursos', this.recurso)
         .then(response => {
           this.recurso.id = response.data.id;
           this.$toast.success('Nuevo recurso guardado!')
