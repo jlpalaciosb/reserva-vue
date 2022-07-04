@@ -18,11 +18,11 @@
         <label>Autocompletar</label>
         <div>
           <button class="btn btn-primary" title="Igual que ayer"
-          :disabled="!fecha" @click="getHorariosRecursos(-1)">
+          :disabled="!fecha" @click="getHorarioRecursos(-1)">
             <i class="fas fa-calendar"></i> -1 día
           </button>
           <button class="btn btn-primary ml-3" title="Igual que la semana pasada"
-          :disabled="!fecha" @click="getHorariosRecursos(-7)">
+          :disabled="!fecha" @click="getHorarioRecursos(-7)">
             <i class="fas fa-calendar"></i> -7 días
           </button>
         </div>
@@ -31,7 +31,7 @@
     <div v-if="fecha
     && horarios.length
     && recursos.length
-    && horariosRecursos.length == (horarios.length * recursos.length)">
+    && horarioRecursos.length == (horarios.length * recursos.length)">
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -72,7 +72,7 @@ export default {
   data() {
     return {
       fecha: this.$util.localHoyISO(),
-      horariosRecursos: [],
+      horarioRecursos: [],
       horarios: [],
       recursos: [],
     }
@@ -82,17 +82,17 @@ export default {
   created() {
     this.getHorarios()
     this.getRecursos()
-    this.getHorariosRecursos()
+    this.getHorarioRecursos()
   },
   methods: {
     getHorarios() {
       this.$store.commit('iniLoading')
-      axios.get('/horarios?sub_index=all_activos')
+      axios.get('/horarios?activo=1&per_page=1000') // long per page to fetch all
         .then((response) => {
-          let res = response.data
+          let res = response.data.data
           if (res.length >= 0) { // si es un array
             this.horarios = res
-            this.fillHorariosRecursos()
+            this.fillHorarioRecursos()
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -107,12 +107,12 @@ export default {
     },
     getRecursos() {
       this.$store.commit('iniLoading')
-      axios.get('/recursos?sub_index=all_activos')
+      axios.get('/recursos?activo=1&per_page=1000') // long per page to fetch all
         .then((response) => {
-          let res = response.data
+          let res = response.data.data
           if (res.length >= 0) { // si es un array
             this.recursos = res
-            this.fillHorariosRecursos()
+            this.fillHorarioRecursos()
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -125,19 +125,19 @@ export default {
           this.$store.commit('finLoading')
         })
     },
-    getHorariosRecursos(offset = 0) {
+    getHorarioRecursos(offset = 0) {
       this.$store.commit('iniLoading')
-      axios.get(`/horariosRecursos?fecha=${this.fecha}&offset=${offset}`)
+      axios.get(`/horarioRecursos?fecha=${this.fecha}&offset=${offset}`)
         .then((response) => {
           let res = response.data
           if (res.length >= 0) { // si es un array
-            this.horariosRecursos = res
+            this.horarioRecursos = res
             if (offset) {
-              this.horariosRecursos.forEach(hr => {
+              this.horarioRecursos.forEach(hr => {
                 hr.fecha = this.fecha; // fix fecha
               })
             }
-            this.fillHorariosRecursos()
+            this.fillHorarioRecursos()
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -151,7 +151,7 @@ export default {
         })
     },
     findHorarioRecurso(idHorario, idRecurso) {
-      return this.horariosRecursos
+      return this.horarioRecursos
         .filter(hr =>
           hr.id_horario == idHorario &&
           hr.id_recurso == idRecurso)[0]
@@ -159,12 +159,12 @@ export default {
     },
     guardar() {
       this.$store.commit('iniLoading')
-      axios.post('/horariosRecursos', this.horariosRecursos)
+      axios.post('/horarioRecursos', this.horarioRecursos)
         .then((response) => {
           let res = response.data
           if (res.ok) {
             this.$toast.success('Programación de recursos guardada')
-            this.getHorariosRecursos() // refresh set id modelo HorarioRecurso
+            this.getHorarioRecursos() // refresh set id modelo HorarioRecurso
           } else {
             this.$toast.error('Algo salió mal')
           }
@@ -177,13 +177,13 @@ export default {
           this.$store.commit('finLoading')
         })
     },
-    fillHorariosRecursos() {
+    fillHorarioRecursos() {
       this.horarios.forEach(hor => {
         this.recursos.forEach(rec => {
           let hr = this.findHorarioRecurso(hor.id, rec.id)
           if (hr == null) {
             // fill new HorarioRecurso
-            this.horariosRecursos.push({
+            this.horarioRecursos.push({
               id: null,
               fecha: this.fecha,
               id_horario: hor.id,
@@ -198,7 +198,7 @@ export default {
   watch: {
     fecha: function() {
       if (this.fecha) {
-        this.getHorariosRecursos()
+        this.getHorarioRecursos()
       }
     }
   }

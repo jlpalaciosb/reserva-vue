@@ -87,7 +87,7 @@ export default {
   methods: {
     getListaHorarioRecurso() {
       this.$store.commit('iniLoading')
-      axios.get('/horariosRecursos')
+      axios.get('/horarioRecursos')
         .then((response) => {
           let res = response.data
           if (res.length >= 0) { // si es un array

@@ -93,8 +93,8 @@ export default {
       this.$store.commit('iniLoading')
       let params = new URLSearchParams();
       params.set('page', page);
-      params.set('horaDesde', this.filtros.horaDesde);
-      params.set('horaHasta', this.filtros.horaHasta);
+      params.set('hora_desde', this.filtros.horaDesde);
+      params.set('hora_hasta', this.filtros.horaHasta);
       axios.get('/horarios?' + params.toString())
         .then(response => {
           this.$store.commit('finLoading')
