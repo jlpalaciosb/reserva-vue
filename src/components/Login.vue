@@ -70,7 +70,7 @@ export default {
         device: 'asdf'
       }
       this.$store.commit('iniLoading')
-      axios.post('/tokens/create', creds) 
+      axios.post('/login', creds)
         .then((response) => {
           let res = response.data
           if (res.usuario && res.token) {
