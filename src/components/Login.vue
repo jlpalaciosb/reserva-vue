@@ -12,7 +12,7 @@
         <div class="card-body">
           <div>
             <div class="form-group">
-              <label for="input-username">Usuario</label>
+              <label for="input-username">Usuario o email</label>
               <input v-model.trim="username" :class="{ 'is-invalid': errors.username.length }"
               @keypress.enter="login()" type="text" class="form-control" id="input-username">
               <div v-for="(error, index) in errors.username" :key="index"
@@ -28,11 +28,20 @@
               class="invalid-feedback">
                 {{ error }}
               </div>
+              <a :href="$store.state.backend + '/forgot-password'"
+              class="d-block text-right text-warning">
+                Olvidó su contraseña?
+              </a>
             </div>
-            <div class="d-flex justify-content-between">
-              <button @click="login()" class="btn btn-primary">
+            
+            <div class="d-flex justify-content-center form-group">
+              <button @click="login()" class="btn btn-primary"
+              style="width: 80%">
                 <i class="fas fa-sign-in-alt"></i> Ingresar
               </button>
+            </div>
+            
+            <div class="d-flex justify-content-end">
               <router-link to="/registro" class="btn btn-light">
                 <i class="fas fa-user-plus"></i> Nuevo usuario
               </router-link>

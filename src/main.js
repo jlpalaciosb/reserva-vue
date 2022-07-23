@@ -28,7 +28,8 @@ const store = createStore({
       nomReservable01: process.env.VUE_APP_NOM_RESERVABLE_01,
       nomReservable10: process.env.VUE_APP_NOM_RESERVABLE_10,
       nomReservable11: process.env.VUE_APP_NOM_RESERVABLE_11,
-      loadingCount: 0
+      loadingCount: 0,
+      backend: process.env.VUE_APP_BACKEND,
     }
   },
   mutations: {
