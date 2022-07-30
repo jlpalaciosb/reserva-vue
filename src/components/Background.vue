@@ -1,5 +1,5 @@
 <template>
-  <img src="../assets/header-bg.svg" id="bg" alt="">
+  <img src="../assets/background-im.jpg" id="bg" alt="">
 </template>
 
 <script>

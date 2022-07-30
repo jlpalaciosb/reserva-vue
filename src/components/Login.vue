@@ -7,7 +7,7 @@
       </div>
       <div class="card bg-dark text-white">
         <div class="card-header">
-          Iniciar Sesión
+          Iniciar sesión
         </div>
         <div class="card-body">
           <div>
