@@ -66,7 +66,22 @@ export default {
 
 <!-- Don't add "scoped" attribute to apply CSS to all components -->
 <style>
+
+  /* estilo toast */
   .v-toast {
     z-index: 999999 !important;
   }
+
+  /* estilo pagination */
+  .pagination-page-nav:not(.active) .page-link {
+    background-color: var(--dark) !important;
+    color: white;
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  .pagination-prev-nav .page-link, .pagination-next-nav .page-link {
+    background-color: var(--dark) !important;
+    color: white;
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+
 </style>

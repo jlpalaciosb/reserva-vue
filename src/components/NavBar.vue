@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
       <img src="/images/logo-white.png" alt="" height="32">
     </a>
@@ -47,7 +47,7 @@
       <div class="form-inline my-2 my-lg-0">
         <!-- por ahora el dropdown muestra solo en escritorio -->
         <div class="dropdown d-none d-lg-block">
-          <div class="cpointer dropdown-toggle- bg-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          <div class="cpointer dropdown-toggle- bg-secondary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           style="width: 32px; height: 32px; border-radius: 50%;">
             <span class="d-block text-center text-white"
             style="line-height: 32px;">
