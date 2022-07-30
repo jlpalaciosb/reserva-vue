@@ -4,10 +4,12 @@
     <RouterView />
   </div>
   <Loading v-if="isLoading" :active="true" :is-full-page="true"/>
+  <Background />
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue'
+import Background from './components/Background.vue'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 
@@ -15,7 +17,8 @@ export default {
   name: 'App',
   components: {
     NavBar,
-    Loading
+    Background,
+    Loading,
   },
   data() {
     return {
