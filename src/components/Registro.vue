@@ -3,9 +3,9 @@
     <div class="col-0 col-sm-2 col-lg-4"></div>
     <div class="col-12 col-sm-8 col-lg-4">
       <div class="d-flex justify-content-center mb-2">
-        <img src="/images/logo-color.png" alt="" height="32">
+        <img src="/images/logo-white.png" alt="" height="32">
       </div>
-      <div class="card">
+      <div class="card bg-dark text-white">
         <div class="card-header">
           Nuevo usuario
         </div>
@@ -65,11 +65,11 @@
                 {{ error }}
               </div>
             </div>
-            <div class="d-flex justify-content-between">
-              <button @click="register()" class="btn btn-primary">
+            <div class="">
+              <button @click="register()" class="btn btn-primary mr-3">
                 <i class="fas fa-save"></i> Guardar
               </button>
-              <router-link to="/login" class="btn btn-light">
+              <router-link to="/login" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Cancelar
               </router-link>
             </div>

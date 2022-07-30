@@ -1,9 +1,9 @@
 <template>
-  <h1 class="mt-3 mb-3">
+  <h1 class="mt-3 mb-3 text-white">
     Reservar {{ $store.state.nomReservable11 }}
   </h1>
   <div class="table-responsive">
-    <table class="table">
+    <table class="table table-dark">
       <thead>
         <tr>
           <th>Horarios</th>
@@ -17,7 +17,7 @@
           <td>{{ $util.labelHorario(hor) }}</td>
           <td v-for="rec, index in recursos" :key="index"
           :set="horarioRecurso = getHorarioRecurso(hor.id, rec.id)">
-            <div class="card">
+            <div class="card bg-dark text-white">
               <div v-if="horarioRecurso != null && horarioRecurso.limite > 0"
               class="card-body">
                 <p>

@@ -1,30 +1,34 @@
 <template>
   <div v-if="$store.state.usuario?.is_admin">
-    <h1 class="mt-3 mb-3">
+    <h1 class="mt-3 mb-3 text-white">
       Administración de reservables
     </h1>
-    <div class="row">
-      <div class="col-12 col-lg-4 form-group">
-        <label for="input-fecha">
-          Fecha de Programación <span class="text-danger">*</span>
-        </label>
-        <input v-model="fecha" :class="{ 'is-invalid': !fecha }"
-        type="date" class="form-control" id="input-fecha">
-        <div class="invalid-feedback">
-          Ingrese una fecha 
-        </div>
-      </div>
-      <div class="col-12 col-lg-8 form-group">
-        <label>Autocompletar</label>
-        <div>
-          <button class="btn btn-primary" title="Igual que ayer"
-          :disabled="!fecha" @click="getHorarioRecursos(-1)">
-            <i class="fas fa-calendar"></i> -1 día
-          </button>
-          <button class="btn btn-primary ml-3" title="Igual que la semana pasada"
-          :disabled="!fecha" @click="getHorarioRecursos(-7)">
-            <i class="fas fa-calendar"></i> -7 días
-          </button>
+    <div class="card bg-dark text-white mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-lg-4">
+            <label for="input-fecha">
+              Fecha de Programación <span class="text-danger">*</span>
+            </label>
+            <input v-model="fecha" :class="{ 'is-invalid': !fecha }"
+            type="date" class="form-control" id="input-fecha">
+            <div class="invalid-feedback">
+              Ingrese una fecha 
+            </div>
+          </div>
+          <div class="col-12 col-lg-8">
+            <label>Autocompletar</label>
+            <div>
+              <button class="btn btn-primary" title="Igual que ayer"
+              :disabled="!fecha" @click="getHorarioRecursos(-1)">
+                <i class="fas fa-calendar"></i> -1 día
+              </button>
+              <button class="btn btn-primary ml-3" title="Igual que la semana pasada"
+              :disabled="!fecha" @click="getHorarioRecursos(-7)">
+                <i class="fas fa-calendar"></i> -7 días
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -33,7 +37,7 @@
     && recursos.length
     && horarioRecursos.length == (horarios.length * recursos.length)">
       <div class="table-responsive">
-        <table class="table">
+        <table class="table table-dark">
           <thead>
             <tr>
               <th>Horarios</th>

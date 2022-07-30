@@ -1,31 +1,35 @@
 <template>
   <div v-if="$store.state.usuario?.is_admin">
-    <h1 class="mt-3 mb-3">
+    <h1 class="mt-3 mb-3 text-white">
       Horarios
     </h1>
-    <div class="row align-items-end">
-      <div class="form-group col-6 col-lg-3">
-        <label for="filtro-hora-desde">Filtro Hora Desde</label>
-        <input id="filtro-hora-desde" v-model="filtros.horaDesde"
-        type="time" class="form-control">
-      </div>
-      <div class="form-group col-6 col-lg-3">
-        <label for="filtro-hora-hasta">Filtro Hora Hasta</label>
-        <input id="filtro-hora-hasta" v-model="filtros.horaHasta"
-        type="time" class="form-control">
-      </div>
-      <div class="form-group col-12 col-lg-6">
-        <button class="btn btn-primary mr-3" @click="getHorarios(1)">
-          <i class="fas fa-list"></i> Listar
-        </button>
-        <router-link to="/horarios/new" class="btn btn-success">
-          <i class="fas fa-plus"></i> Nuevo
-        </router-link>
+    <div class="card bg-dark text-white mb-3">
+      <div class="card-body">
+        <div class="row align-items-end">
+          <div class="col-6 col-lg-3">
+            <label for="filtro-hora-desde">Filtro Hora Desde</label>
+            <input id="filtro-hora-desde" v-model="filtros.horaDesde"
+            type="time" class="form-control">
+          </div>
+          <div class="col-6 col-lg-3">
+            <label for="filtro-hora-hasta">Filtro Hora Hasta</label>
+            <input id="filtro-hora-hasta" v-model="filtros.horaHasta"
+            type="time" class="form-control">
+          </div>
+          <div class="col-12 col-lg-6">
+            <button class="btn btn-primary mr-3" @click="getHorarios(1)">
+              <i class="fas fa-list"></i> Listar
+            </button>
+            <router-link to="/horarios/new" class="btn btn-success">
+              <i class="fas fa-plus"></i> Nuevo
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
     <div>
       <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-dark">
           <thead>
             <tr>
               <th>Nombre</th>

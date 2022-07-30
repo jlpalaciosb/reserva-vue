@@ -1,26 +1,30 @@
 <template>
   <div v-if="$store.state.usuario?.is_admin">
-    <h1 class="mt-3 mb-3">
+    <h1 class="mt-3 mb-3 text-white">
       Recursos
     </h1>
-    <div class="row align-items-end">
-      <div class="form-group col-6 col-lg-3">
-        <label for="filtro-nombre">Filtro Nombre</label>
-        <input id="filtro-nombre" v-model="filtros.nombre"
-        type="text" class="form-control">
-      </div>
-      <div class="form-group col-12 col-lg-6">
-        <button class="btn btn-primary mr-3" @click="getRecursos(1)">
-          <i class="fas fa-list"></i> Listar
-        </button>
-        <router-link to="/recursos/new" class="btn btn-success">
-          <i class="fas fa-plus"></i> Nuevo
-        </router-link>
+    <div class="card bg-dark text-white mb-3">
+      <div class="card-body">
+        <div class="row align-items-end">
+          <div class="form-group col-6 col-lg-3">
+            <label for="filtro-nombre">Filtro Nombre</label>
+            <input id="filtro-nombre" v-model="filtros.nombre"
+            type="text" class="form-control">
+          </div>
+          <div class="form-group col-12 col-lg-6">
+            <button class="btn btn-primary mr-3" @click="getRecursos(1)">
+              <i class="fas fa-list"></i> Listar
+            </button>
+            <router-link to="/recursos/new" class="btn btn-success">
+              <i class="fas fa-plus"></i> Nuevo
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
     <div>
       <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-dark">
           <thead>
             <tr>
               <th>Nombre</th>

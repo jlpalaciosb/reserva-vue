@@ -3,9 +3,9 @@
     <div class="col-0 col-sm-2 col-lg-4"></div>
     <div class="col-12 col-sm-8 col-lg-4">
       <div class="d-flex justify-content-center mb-2">
-        <img src="/images/logo-color.png" alt="" height="32">
+        <img src="/images/logo-white.png" alt="" height="32">
       </div>
-      <div class="card">
+      <div class="card bg-dark text-white">
         <div class="card-header">
           Iniciar Sesión
         </div>
@@ -23,7 +23,8 @@
             <div class="form-group">
               <label for="input-password">Contraseña</label>
               <input v-model="password" :class="{ 'is-invalid': errors.password.length }"
-              @keypress.enter="login()" type="password" class="form-control" id="input-password">
+              @keypress.enter="login()" type="password"
+              class="form-control" id="input-password">
               <div v-for="(error, index) in errors.password" :key="index"
               class="invalid-feedback">
                 {{ error }}
@@ -42,7 +43,7 @@
             </div>
             
             <div class="d-flex justify-content-end">
-              <router-link to="/registro" class="btn btn-light">
+              <router-link to="/registro" class="btn btn-secondary">
                 <i class="fas fa-user-plus"></i> Nuevo usuario
               </router-link>
             </div>
