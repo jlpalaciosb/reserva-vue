@@ -6,11 +6,11 @@
       </div>
       <div class="card bg-dark text-white">
         <div class="card-header">
-          Nuevo usuario
+          REGISTRARME
         </div>
         <div class="card-body">
           <div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="input-username">Usuario</label>
               <input v-model.trim="username" :class="{ 'is-invalid': errors.username.length }"
               @keypress.enter="login()" type="text" class="form-control" id="input-username">
@@ -18,17 +18,17 @@
               class="invalid-feedback">
                 {{ error }}
               </div>
-            </div>
+            </div> -->
             <div class="form-group">
-              <label for="input-nombre">Nombre</label>
-              <input v-model.trim="nombre" :class="{ 'is-invalid': errors.nombre.length }"
-              @keypress.enter="login()" type="text" class="form-control" id="input-nombre">
-              <div v-for="(error, index) in errors.nombre" :key="index"
+              <label for="input-nombre-completo">Nombre y apellido</label>
+              <input v-model.trim="nombre_completo" :class="{ 'is-invalid': errors.nombre_completo.length }"
+              @keypress.enter="login()" type="text" class="form-control" id="input-nombre-completo">
+              <div v-for="(error, index) in errors.nombre_completo" :key="index"
               class="invalid-feedback">
                 {{ error }}
               </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="input-apellido">Apellido</label>
               <input v-model.trim="apellido" :class="{ 'is-invalid': errors.apellido.length }"
               @keypress.enter="login()" type="text" class="form-control" id="input-apellido">
@@ -36,9 +36,9 @@
               class="invalid-feedback">
                 {{ error }}
               </div>
-            </div>
+            </div> -->
             <div class="form-group">
-              <label for="input-email">Correo</label>
+              <label for="input-email">Correo electrónico</label>
               <input v-model.trim="email" :class="{ 'is-invalid': errors.email.length }"
               @keypress.enter="login()" type="text" class="form-control" id="input-email">
               <div v-for="(error, index) in errors.email" :key="index"
@@ -46,25 +46,32 @@
                 {{ error }}
               </div>
             </div>
-            <div class="form-group">
-              <label for="input-password">Contraseña</label>
-              <input v-model="password" :class="{ 'is-invalid': errors.password.length }"
-              @keypress.enter="login()" type="password" class="form-control" id="input-password">
-              <div v-for="(error, index) in errors.password" :key="index"
-              class="invalid-feedback">
-                {{ error }}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="input-password">Confirmar contraseña</label>
-              <input v-model="confirm" :class="{ 'is-invalid': errors.confirm.length }"
-              @keypress.enter="login()" type="password" class="form-control" id="input-confirm">
-              <div v-for="(error, index) in errors.confirm" :key="index"
-              class="invalid-feedback">
-                {{ error }}
-              </div>
-            </div>
 
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="input-password">Contraseña</label>
+                  <input v-model="password" :class="{ 'is-invalid': errors.password.length }"
+                  @keypress.enter="login()" type="password" class="form-control" id="input-password">
+                  <div v-for="(error, index) in errors.password" :key="index"
+                  class="invalid-feedback">
+                    {{ error }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="input-password">Confirmar</label>
+                  <input v-model="confirm" :class="{ 'is-invalid': errors.confirm.length }"
+                  @keypress.enter="login()" type="password" class="form-control" id="input-confirm">
+                  <div v-for="(error, index) in errors.confirm" :key="index"
+                  class="invalid-feedback">
+                    {{ error }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
             <div class="form-group">
               <button @click="register()" class="btn btn-primary w-100">
                 REGISTRARME
@@ -108,16 +115,12 @@ export default {
   },
   data() {
     return {
-      username: null,
-      nombre: null,
-      apellido: null,
+      nombre_completo: null,
       email: null,
       password: null,
       confirm: null,
       errors: {
-        username: [],
-        nombre: [],
-        apellido: [],
+        nombre_completo: [],
         email: [],
         password: [],
         confirm: [],
@@ -127,9 +130,7 @@ export default {
   methods: {
     register() {
       let newUser = {
-        username: this.username,
-        nombre: this.nombre,
-        apellido: this.apellido,
+        nombre_completo: this.nombre_completo,
         email: this.email,
         password: this.password,
         confirm: this.confirm,
@@ -159,14 +160,8 @@ export default {
     },
   },
   watch: {
-    username: function () {
-      this.errors.username = []
-    },
-    nombre: function () {
-      this.errors.nombre = []
-    },
-    apellido: function () {
-      this.errors.apellido = []
+    nombre_completo: function () {
+      this.errors.nombre_completo = []
     },
     email: function () {
       this.errors.email = []

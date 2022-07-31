@@ -11,7 +11,7 @@
         <div class="card-body">
           <div>
             <div class="form-group">
-              <label for="input-username">Usuario o email</label>
+              <label for="input-username">Correo electrónico</label>
               <input v-model.trim="username" :class="{ 'is-invalid': errors.username.length }"
               @keypress.enter="login()" type="text" class="form-control" id="input-username">
               <div v-for="(error, index) in errors.username" :key="index"
@@ -39,7 +39,7 @@
             
             <div class="form-group">
               <button @click="login()" class="btn btn-primary w-100 mb-2">
-                INGRESAR
+                INICIAR SESIÓN
               </button>
               <a :href="$store.state.backend + '/forgot-password'"
               class="d-block text-right text-secondary">
@@ -61,7 +61,7 @@
             <div class="text-center">
               <span class="mr-2">Necesitas una cuenta?</span>
               <router-link to="/registro" class="">
-                REGISTRO
+                REGISTRARME
               </router-link>
             </div>
           </div>
