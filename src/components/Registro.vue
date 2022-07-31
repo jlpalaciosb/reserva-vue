@@ -1,7 +1,6 @@
 <template>
-  <div class="row">
-    <div class="col-0 col-sm-2 col-lg-4"></div>
-    <div class="col-12 col-sm-8 col-lg-4">
+  <div class="container">
+    <div class="">
       <div class="d-flex justify-content-center mb-2">
         <img src="/images/logo-white.png" alt="" height="32">
       </div>
@@ -77,12 +76,10 @@
         </div>
       </div>
     </div>
-    <div class="col-0 col-sm-2 col-lg-4"></div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'RegistroPage',
   props: {
@@ -167,5 +164,8 @@ export default {
   }
   button {
     width: 8rem;
+  }
+  .container {
+    max-width: 400px;
   }
 </style>

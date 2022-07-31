@@ -1,7 +1,6 @@
 <template>
-  <div class="row">
-    <div class="col-0 col-sm-2 col-lg-4"></div>
-    <div class="col-12 col-sm-8 col-lg-4">
+  <div class="container">
+    <div class="">
       <div class="d-flex justify-content-center mb-2">
         <img src="/images/logo-white.png" alt="" height="32">
       </div>
@@ -29,18 +28,26 @@
               class="invalid-feedback">
                 {{ error }}
               </div>
+              <div class="custom-control custom-checkbox mt-2">
+                <input type="checkbox" class="custom-control-input" id="remember-check"
+                v-model="remember">  
+                <label class="custom-control-label" for="remember-check">
+                  Recordarme
+                </label>  
+              </div> 
+            </div>
+            
+            <div class="form-group">
+              <button @click="login()" class="btn btn-primary w-100 mb-2">
+                <i class="fas fa-sign-in-alt"></i> Ingresar
+              </button>
               <a :href="$store.state.backend + '/forgot-password'"
-              class="d-block text-right text-warning">
+              class="d-block text-right text-secondary">
                 Olvidó su contraseña?
               </a>
             </div>
-            
-            <div class="d-flex justify-content-center form-group">
-              <button @click="login()" class="btn btn-primary"
-              style="width: 80%">
-                <i class="fas fa-sign-in-alt"></i> Ingresar
-              </button>
-            </div>
+
+            <hr>
             
             <div class="d-flex justify-content-end">
               <router-link to="/registro" class="btn btn-secondary">
@@ -51,12 +58,10 @@
         </div>
       </div>
     </div>
-    <div class="col-0 col-sm-2 col-lg-4"></div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'LoginPage',
   props: {
@@ -66,6 +71,7 @@ export default {
     return {
       username: null,
       password: null,
+      remember: false,
       errors: {
         username: [],
         password: []
@@ -119,5 +125,11 @@ export default {
   }
   button {
     width: 8rem;
+  }
+  .custom-control-label:before{
+    background-color: var(--secondary);
+  }
+  .container {
+    max-width: 400px;
   }
 </style>
