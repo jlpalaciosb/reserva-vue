@@ -2,7 +2,7 @@
   <div class="container">
     <div class="">
       <div class="d-flex justify-content-center mb-2">
-        <img src="/images/logo-white.png" alt="" height="32">
+        <img src="/images/logo-white.png" id="imglogo" height="32">
       </div>
       <div class="card bg-dark text-white">
         <div class="card-header">
@@ -39,7 +39,7 @@
             
             <div class="form-group">
               <button @click="login()" class="btn btn-primary w-100 mb-2">
-                <i class="fas fa-sign-in-alt"></i> Ingresar
+                INGRESAR
               </button>
               <a :href="$store.state.backend + '/forgot-password'"
               class="d-block text-right text-secondary">
@@ -47,11 +47,21 @@
               </a>
             </div>
 
-            <hr>
+            <HrText text="or" />
+
+            <div class="d-flex justify-content-center mb-3">
+              <img src="../assets/google.png" alt="google"
+              class="img-social mr-3" @click="clickSocial()">
+              <img src="../assets/facebook.png" alt="facebook"
+              class="img-social mr-3" @click="clickSocial()">
+              <img src="../assets/linkedin.png" alt="linkedin"
+              class="img-social mr-3-" @click="clickSocial()">
+            </div>
             
-            <div class="d-flex justify-content-end">
-              <router-link to="/registro" class="btn btn-secondary">
-                <i class="fas fa-user-plus"></i> Nuevo usuario
+            <div class="text-center">
+              <span class="mr-2">Necesitas una cuenta?</span>
+              <router-link to="/registro" class="">
+                REGISTRO
               </router-link>
             </div>
           </div>
@@ -62,10 +72,15 @@
 </template>
 
 <script>
+import HrText from './HrText.vue';
+
 export default {
   name: 'LoginPage',
   props: {
     // msg: String
+  },
+  components: {
+    HrText,
   },
   data() {
     return {
@@ -106,6 +121,9 @@ export default {
           this.$store.commit('finLoading')
         })
     },
+    clickSocial() {
+      this.$toast.info('Sorry, not implemented yet.')
+    }
   },
   watch: {
     username: function () {
@@ -120,7 +138,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  img {
+  #imglogo {
     margin-top: 60px;
   }
   button {
@@ -131,5 +149,8 @@ export default {
   }
   .container {
     max-width: 400px;
+  }
+  .img-social {
+    height: 40px;
   }
 </style>
