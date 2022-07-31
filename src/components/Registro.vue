@@ -2,7 +2,7 @@
   <div class="container">
     <div class="">
       <div class="d-flex justify-content-center mb-2">
-        <img src="/images/logo-white.png" alt="" height="32">
+        <img src="/images/logo-white.png" id="imglogo" height="32">
       </div>
       <div class="card bg-dark text-white">
         <div class="card-header">
@@ -64,12 +64,28 @@
                 {{ error }}
               </div>
             </div>
-            <div class="">
-              <button @click="register()" class="btn btn-primary mr-3">
-                <i class="fas fa-save"></i> Guardar
+
+            <div class="form-group">
+              <button @click="register()" class="btn btn-primary w-100">
+                REGISTRARME
               </button>
-              <router-link to="/login" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i> Cancelar
+            </div>
+
+            <HrText text="or" />
+
+            <div class="d-flex justify-content-center mb-3">
+              <img src="../assets/google.png" alt="google"
+              class="img-social mr-3" @click="clickSocial()">
+              <img src="../assets/facebook.png" alt="facebook"
+              class="img-social mr-3" @click="clickSocial()">
+              <img src="../assets/linkedin.png" alt="linkedin"
+              class="img-social mr-3-" @click="clickSocial()">
+            </div>
+            
+            <div class="text-center">
+              <span class="mr-2">Ya tienes una cuenta?</span>
+              <router-link to="/login" class="">
+                INICIAR SESIÓN
               </router-link>
             </div>
           </div>
@@ -80,10 +96,15 @@
 </template>
 
 <script>
+import HrText from './HrText.vue';
+
 export default {
   name: 'RegistroPage',
   props: {
     // msg: String
+  },
+  components: {
+    HrText,
   },
   data() {
     return {
@@ -133,6 +154,9 @@ export default {
           this.$store.commit('finLoading')
         })
     },
+    clickSocial() {
+      this.$toast.info('Sorry, not implemented yet.')
+    },
   },
   watch: {
     username: function () {
@@ -159,7 +183,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  img {
+  #imglogo {
     margin-top: 60px;
   }
   button {
@@ -167,5 +191,8 @@ export default {
   }
   .container {
     max-width: 400px;
+  }
+  .img-social {
+    height: 40px;
   }
 </style>
