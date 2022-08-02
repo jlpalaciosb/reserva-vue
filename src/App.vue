@@ -4,7 +4,7 @@
     <RouterView />
   </div>
   <Loading v-if="isLoading" :active="true" :is-full-page="true"
-  color="#fff" backgroundColor="#000" lockScroll="true" />
+  color="#fff" backgroundColor="#000" :lockScroll="true" />
   <Background />
 </template>
 

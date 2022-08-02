@@ -41,10 +41,12 @@
               <button @click="login()" class="btn btn-primary w-100 mb-2">
                 INICIAR SESIÓN
               </button>
-              <a :href="$store.state.backend + '/forgot-password'"
-              class="d-block text-right text-secondary">
-                Olvidó su contraseña?
-              </a>
+              <div class="text-right">
+                <a :href="$store.state.backend + '/forgot-password'"
+                class="text-secondary">
+                  Olvidó su contraseña?
+                </a>
+              </div>
             </div>
 
             <HrText text="or" />
@@ -86,7 +88,7 @@ export default {
     return {
       username: null,
       password: null,
-      remember: false,
+      remember: JSON.parse(localStorage.getItem('remember')) || false,
       errors: {
         username: [],
         password: []
@@ -105,7 +107,7 @@ export default {
         .then((response) => {
           let res = response.data
           if (res.usuario && res.token) {
-            this.$store.commit('login', [res.usuario, res.token])
+            this.$store.commit('login', [res.usuario, res.token, this.remember])
             this.$toast.success('Bienvenido ' + res.usuario.nombre + '.')
             this.$router.push('/')
           } else {

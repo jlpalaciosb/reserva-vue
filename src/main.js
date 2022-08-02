@@ -33,17 +33,30 @@ const store = createStore({
     }
   },
   mutations: {
-    login(state, [usuario, token]) {
+    login(state, [usuario, token, remember]) {
       state.usuario = usuario
       state.token = token
       state.isAuthenticated = true
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+      // storage
+      sessionStorage.setItem('usuario', JSON.stringify(usuario))
+      sessionStorage.setItem('token', token)
+      if (remember) {
+        localStorage.setItem('usuario', JSON.stringify(usuario))
+        localStorage.setItem('token', token)
+      }
+      // recuerda su eleccion
+      localStorage.setItem('remember', JSON.stringify(remember))
     },
     logout (state) {
       state.usuario = null
       state.token = null
       state.isAuthenticated = false
       axios.defaults.headers.common['Authorization'] = null
+      sessionStorage.removeItem('usuario')
+      sessionStorage.removeItem('token')
+      localStorage.removeItem('usuario')
+      localStorage.removeItem('token')
     },
     iniLoading (state) {
       state.loadingCount++
@@ -57,6 +70,21 @@ const store = createStore({
     }
   }
 })
+
+// recuperar session
+if (sessionStorage.getItem('usuario') && sessionStorage.getItem('token')) {
+  store.commit('login', [
+    JSON.parse(sessionStorage.getItem('usuario')),
+    sessionStorage.getItem('token'),
+    JSON.parse(sessionStorage.getItem('remember')) || false,
+  ]);
+} else if (localStorage.getItem('usuario') && localStorage.getItem('token')) {
+  store.commit('login', [
+    JSON.parse(localStorage.getItem('usuario')),
+    localStorage.getItem('token'),
+    JSON.parse(sessionStorage.getItem('remember')) || false,
+  ]);
+}
 
 // vue router
 import Login from './components/Login.vue'
@@ -84,7 +112,7 @@ const router = createRouter({
 })
 router.beforeEach((to , from, next) => {
   console.log('router.beforeEach', to)
-  store.commit('resetLoading') // medida de seguridad
+  // store.commit('resetLoading') // medida de seguridad
   if (!store.state.isAuthenticated && !to.meta.noLogin) {
     next('/login')
   } else if (store.state.isAuthenticated && to.meta.noLogin) {
@@ -94,7 +122,7 @@ router.beforeEach((to , from, next) => {
   }
 })
 
-// aplicacion
+// crear y montar aplicacion
 const app = createApp(App)
 app.use(router)
 app.use(VueToast, { position: 'top' })
