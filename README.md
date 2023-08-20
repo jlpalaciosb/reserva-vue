@@ -1,12 +1,8 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/logo-color.png" width="300"></a></p>
+<p align="center"><img src="public/images/logo-color.png" width="300"></p>
 
 ## Acerca de ReservasYa
 
 ReservasYa es una aplicación web donde los usuarios pueden reservar recursos limitados. El usuario administrador gestiona los recursos y horarios reservables.
-
-## Demo
-
-https://reservasya.herokuapp.com
 
 ## Características
 
@@ -23,11 +19,16 @@ Este repositorio corresponde al frontend de la aplicación, fue desarrollado con
 - Rutas de la app web implementado con Vue Router.
 - Toast alerts. Loading overlay.
 
-## Backend
-
-https://github.com/jlpalaciosb/reserva-laravel
+El backend se encuentra en [jlpalaciosb/reserva-laravel](https://github.com/jlpalaciosb/reserva-laravel).
 
 ## Project setup
+
+### Set environment variables
+```
+cp .env .env.local
+```
+
+### Install dependencies
 ```
 npm install
 ```

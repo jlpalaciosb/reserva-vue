@@ -14,6 +14,7 @@
               <input type="text" v-model.trim="recurso.nombre"
               class="form-control" id="nombre"
               :class="{ 'is-invalid': errors.nombre.length }">
+              <small class="text-muted">Nombre del reservable.</small>
               <div v-for="(error, index) in errors.nombre" :key="index"
               class="invalid-feedback">
                 {{ error }}
